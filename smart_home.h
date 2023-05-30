@@ -53,17 +53,24 @@ struct SmartHomeController {
     std::vector<std::string> turn_on_all()
     {
         return {
-            switchable_light_1.turn_on(), switchable_light_2.turn_on(), networkable_light.turn_on(),
-            dimmable_light.turn_on(),     coffee_maker.turn_on(),       ac.turn_on(),
+            switchable_light_1.turn_on(),
+            switchable_light_2.turn_on(),
+            networkable_light.turn_on(),
+            dimmable_light.turn_on(),
+            coffee_maker.turn_on(),
+            ac.turn_on(),
         };
     }
 
     std::vector<std::string> turn_off_all()
     {
         return {
-            switchable_light_1.turn_off(), switchable_light_2.turn_off(),
-            networkable_light.turn_off(),  dimmable_light.turn_off(),
-            coffee_maker.turn_off(),       ac.turn_off(),
+            switchable_light_1.turn_off(),
+            switchable_light_2.turn_off(),
+            networkable_light.turn_off(),
+            dimmable_light.turn_off(),
+            coffee_maker.turn_off(),
+            ac.turn_off(),
         };
     }
 
