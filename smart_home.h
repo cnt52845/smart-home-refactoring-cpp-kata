@@ -54,6 +54,11 @@ struct Blinds {
     std::string close() { return "Blinds closed"; }
 };
 
+struct VacuumCleaner {
+    std::string start_cleaning() { return "Vacuum cleaner started cleaning"; }
+    std::string stop_cleaning() { return "Vacuum cleaner stopped cleaning"; }
+};
+
 struct SmartHomeController {
     std::vector<std::string> turn_on_all()
     {
@@ -96,4 +101,5 @@ struct SmartHomeController {
     CoffeeMaker      coffee_maker;
     AirConditioner   ac;
     Blinds           blinds;
+    VacuumCleaner    vacuum_cleaner;
 };

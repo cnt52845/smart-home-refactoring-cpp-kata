@@ -68,3 +68,17 @@ TEST_F(SmartHomeControllerTest, MakeQuickBreakfast)
 
     EXPECT_EQ(controller->make_quick_breakfast("Colombian"), expected);
 }
+
+TEST_F(SmartHomeControllerTest, VacuumCleanerStartCleaning)
+{
+    std::string expected = "Vacuum cleaner started cleaning";
+
+    EXPECT_EQ(controller->vacuum_cleaner.start_cleaning(), expected);
+}
+
+TEST_F(SmartHomeControllerTest, VacuumCleanerStopCleaning)
+{
+    std::string expected = "Vacuum cleaner stopped cleaning";
+
+    EXPECT_EQ(controller->vacuum_cleaner.stop_cleaning(), expected);
+}
