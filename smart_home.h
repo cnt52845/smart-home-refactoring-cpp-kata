@@ -49,6 +49,11 @@ struct CoffeeMaker {
     }
 };
 
+struct Blinds {
+    std::string open() { return "Blinds open"; }
+    std::string close() { return "Blinds closed"; }
+};
+
 struct SmartHomeController {
     std::vector<std::string> turn_on_all()
     {
@@ -80,4 +85,5 @@ struct SmartHomeController {
     DimmableLight    dimmable_light;
     CoffeeMaker      coffee_maker;
     AirConditioner   ac;
+    Blinds           blinds;
 };

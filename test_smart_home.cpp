@@ -49,3 +49,10 @@ TEST_F(SmartHomeControllerTest, ConnectLightToNetwork)
 
     EXPECT_EQ(controller->networkable_light.connect_to_network("Home Network"), expected);
 }
+
+TEST_F(SmartHomeControllerTest, BlindsOpen)
+{
+    std::string expected = "Blinds open";
+
+    EXPECT_EQ(controller->blinds.open(), expected);
+}
