@@ -79,6 +79,16 @@ struct SmartHomeController {
         };
     }
 
+    std::vector<std::string> make_quick_breakfast(const std::string& coffee_type)
+    {
+        return {
+            blinds.open(),
+            coffee_maker.turn_on(),
+            coffee_maker.brew(coffee_type),
+            coffee_maker.turn_off(),
+        };
+    }
+
     SwitchableLight  switchable_light_1;
     SwitchableLight  switchable_light_2;
     NetworkableLight networkable_light;

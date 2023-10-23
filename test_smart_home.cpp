@@ -56,3 +56,15 @@ TEST_F(SmartHomeControllerTest, BlindsOpen)
 
     EXPECT_EQ(controller->blinds.open(), expected);
 }
+
+TEST_F(SmartHomeControllerTest, MakeQuickBreakfast)
+{
+    std::vector<std::string> expected = {
+        "Blinds open",
+        "Coffee maker turned on",
+        "Brewing Colombian coffee",
+        "Coffee maker turned off",
+    };
+
+    EXPECT_EQ(controller->make_quick_breakfast("Colombian"), expected);
+}
