@@ -83,7 +83,6 @@ struct SmartHomeController {
             ac.turn_off(),
         };
         if (is_night_cleaning_scheduled) {
-            std::cout << "before emplace" << std::endl;
             result.emplace_back(vacuum_cleaner.start_cleaning());
         }
         return result;
