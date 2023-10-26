@@ -5,6 +5,7 @@
 
 class SmartHomeControllerTest : public ::testing::Test {
 protected:
+    SmartHomeControllerTest() { controller = std::make_unique<SmartHomeController>(); }
     std::unique_ptr<SmartHomeController> controller;
 };
 
@@ -81,4 +82,23 @@ TEST_F(SmartHomeControllerTest, VacuumCleanerStopCleaning)
     std::string expected = "Vacuum cleaner stopped cleaning";
 
     EXPECT_EQ(controller->vacuum_cleaner.stop_cleaning(), expected);
+}
+
+TEST_F(SmartHomeControllerTest, ScheduleNightCleaning)
+{
+    std::vector<std::string> expected_shedule_cleaning = {
+        "Night cleaning sheduled",
+    };
+    std::vector<std::string> expected_turn_off = {
+        "Switchable light turned off",
+        "Switchable light turned off",
+        "Networkable light turned off",
+        "Dimmable light turned off",
+        "Coffee maker turned off",
+        "AC turned off",
+        "Vacuum cleaner started cleaning",
+    };
+
+    EXPECT_EQ(controller->schedule_night_cleaning(), expected_shedule_cleaning);
+    EXPECT_EQ(controller->turn_off_all(), expected_turn_off);
 }

@@ -74,7 +74,7 @@ struct SmartHomeController {
 
     std::vector<std::string> turn_off_all()
     {
-        return {
+        std::vector<std::string> result{
             switchable_light_1.turn_off(),
             switchable_light_2.turn_off(),
             networkable_light.turn_off(),
@@ -82,6 +82,11 @@ struct SmartHomeController {
             coffee_maker.turn_off(),
             ac.turn_off(),
         };
+        if (is_night_cleaning_scheduled) {
+            std::cout << "before emplace" << std::endl;
+            result.emplace_back(vacuum_cleaner.start_cleaning());
+        }
+        return result;
     }
 
     std::vector<std::string> make_quick_breakfast(const std::string& coffee_type)
@@ -94,6 +99,12 @@ struct SmartHomeController {
         };
     }
 
+    std::vector<std::string> schedule_night_cleaning()
+    {
+        is_night_cleaning_scheduled = true;
+        return {"Night cleaning sheduled"};
+    }
+
     SwitchableLight  switchable_light_1;
     SwitchableLight  switchable_light_2;
     NetworkableLight networkable_light;
@@ -102,4 +113,5 @@ struct SmartHomeController {
     AirConditioner   ac;
     Blinds           blinds;
     VacuumCleaner    vacuum_cleaner;
+    bool             is_night_cleaning_scheduled{false};
 };
