@@ -49,6 +49,16 @@ struct CoffeeMaker {
     }
 };
 
+struct Blinds {
+    std::string open() { return "Blinds open"; }
+    std::string close() { return "Blinds closed"; }
+};
+
+struct VacuumCleaner {
+    std::string start_cleaning() { return "Vacuum cleaner started cleaning"; }
+    std::string stop_cleaning() { return "Vacuum cleaner stopped cleaning"; }
+};
+
 struct SmartHomeController {
     std::vector<std::string> turn_on_all()
     {
@@ -64,7 +74,7 @@ struct SmartHomeController {
 
     std::vector<std::string> turn_off_all()
     {
-        return {
+        std::vector<std::string> result{
             switchable_light_1.turn_off(),
             switchable_light_2.turn_off(),
             networkable_light.turn_off(),
@@ -72,6 +82,26 @@ struct SmartHomeController {
             coffee_maker.turn_off(),
             ac.turn_off(),
         };
+        if (is_night_cleaning_scheduled) {
+            result.emplace_back(vacuum_cleaner.start_cleaning());
+        }
+        return result;
+    }
+
+    std::vector<std::string> make_quick_breakfast(const std::string& coffee_type)
+    {
+        return {
+            blinds.open(),
+            coffee_maker.turn_on(),
+            coffee_maker.brew(coffee_type),
+            coffee_maker.turn_off(),
+        };
+    }
+
+    std::vector<std::string> schedule_night_cleaning()
+    {
+        is_night_cleaning_scheduled = true;
+        return {"Night cleaning sheduled"};
     }
 
     SwitchableLight  switchable_light_1;
@@ -80,4 +110,7 @@ struct SmartHomeController {
     DimmableLight    dimmable_light;
     CoffeeMaker      coffee_maker;
     AirConditioner   ac;
+    Blinds           blinds;
+    VacuumCleaner    vacuum_cleaner;
+    bool             is_night_cleaning_scheduled{false};
 };
