@@ -17,7 +17,7 @@ run:
 
 .PHONY: test
 test:
-	ctest --output-on-failure --test-dir ${BUILDDIR}
+	ctest --output-on-failure -V --test-dir ${BUILDDIR}
 
 .PHONY: format
 format:
