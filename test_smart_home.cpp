@@ -38,14 +38,16 @@ TEST_F(SmartHomeControllerTest, TurnOffAll)
 
 TEST_F(SmartHomeControllerTest, DimLight)
 {
-    std::string expected = "Dimmable light dimmed to 50%";
+    std::shared_ptr<DimmableLight> dimmable_light{std::make_shared<DimmableLight>()};
+    std::string                    expected = "Dimmable light dimmed to 50%";
 
-    EXPECT_EQ(controller->dimmable_light->dim(50), expected);
+    EXPECT_EQ(dimmable_light->dim(50), expected);
 }
 
 TEST_F(SmartHomeControllerTest, ConnectLightToNetwork)
 {
-    std::string expected = "Networkable light connected to Home Network";
+    std::shared_ptr<NetworkableLight> networkable_light{std::make_shared<NetworkableLight>()};
+    std::string                       expected = "Networkable light connected to Home Network";
 
-    EXPECT_EQ(controller->networkable_light->connect_to_network("Home Network"), expected);
+    EXPECT_EQ(networkable_light->connect_to_network("Home Network"), expected);
 }

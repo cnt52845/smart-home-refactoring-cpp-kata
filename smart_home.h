@@ -4,12 +4,14 @@
 #include <string>
 #include <vector>
 
-struct SwitchableLight {
+class SwitchableLight {
+public:
     std::string turn_on() { return "Switchable light turned on"; }
     std::string turn_off() { return "Switchable light turned off"; }
 };
 
-struct DimmableLight {
+class DimmableLight {
+public:
     std::string turn_on() { return "Dimmable light turned on at full brightness"; }
     std::string turn_off() { return "Dimmable light turned off"; }
 
@@ -19,7 +21,8 @@ struct DimmableLight {
     }
 };
 
-struct NetworkableLight {
+class NetworkableLight {
+public:
     std::string turn_on() { return "Networkable light turned on"; }
     std::string turn_off() { return "Networkable light turned off"; }
 
@@ -29,7 +32,8 @@ struct NetworkableLight {
     }
 };
 
-struct AirConditioner {
+class AirConditioner {
+public:
     std::string turn_on() { return "AC turned on"; }
     std::string turn_off() { return "AC turned off"; }
 
@@ -39,7 +43,8 @@ struct AirConditioner {
     }
 };
 
-struct CoffeeMaker {
+class CoffeeMaker {
+public:
     std::string turn_on() { return "Coffee maker turned on"; }
     std::string turn_off() { return "Coffee maker turned off"; }
 
@@ -49,7 +54,8 @@ struct CoffeeMaker {
     }
 };
 
-struct SmartHomeController {
+class SmartHomeController {
+public:
     std::vector<std::string> turn_on_all()
     {
         return {
@@ -74,6 +80,7 @@ struct SmartHomeController {
         };
     }
 
+private:
     std::shared_ptr<SwitchableLight>  switchable_light_1{std::make_shared<SwitchableLight>()};
     std::shared_ptr<SwitchableLight>  switchable_light_2{std::make_shared<SwitchableLight>()};
     std::shared_ptr<NetworkableLight> networkable_light{std::make_shared<NetworkableLight>()};
