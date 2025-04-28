@@ -5,7 +5,7 @@
 
 class SmartHomeControllerTest : public ::testing::Test {
 protected:
-    std::unique_ptr<SmartHomeController> controller;
+    std::unique_ptr<SmartHomeController> controller{std::make_unique<SmartHomeController>()};
 };
 
 TEST_F(SmartHomeControllerTest, TurnOnAll)
@@ -40,12 +40,12 @@ TEST_F(SmartHomeControllerTest, DimLight)
 {
     std::string expected = "Dimmable light dimmed to 50%";
 
-    EXPECT_EQ(controller->dimmable_light.dim(50), expected);
+    EXPECT_EQ(controller->dimmable_light->dim(50), expected);
 }
 
 TEST_F(SmartHomeControllerTest, ConnectLightToNetwork)
 {
     std::string expected = "Networkable light connected to Home Network";
 
-    EXPECT_EQ(controller->networkable_light.connect_to_network("Home Network"), expected);
+    EXPECT_EQ(controller->networkable_light->connect_to_network("Home Network"), expected);
 }

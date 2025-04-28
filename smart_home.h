@@ -53,31 +53,31 @@ struct SmartHomeController {
     std::vector<std::string> turn_on_all()
     {
         return {
-            switchable_light_1.turn_on(),
-            switchable_light_2.turn_on(),
-            networkable_light.turn_on(),
-            dimmable_light.turn_on(),
-            coffee_maker.turn_on(),
-            ac.turn_on(),
+            switchable_light_1->turn_on(),
+            switchable_light_2->turn_on(),
+            networkable_light->turn_on(),
+            dimmable_light->turn_on(),
+            coffee_maker->turn_on(),
+            ac->turn_on(),
         };
     }
 
     std::vector<std::string> turn_off_all()
     {
         return {
-            switchable_light_1.turn_off(),
-            switchable_light_2.turn_off(),
-            networkable_light.turn_off(),
-            dimmable_light.turn_off(),
-            coffee_maker.turn_off(),
-            ac.turn_off(),
+            switchable_light_1->turn_off(),
+            switchable_light_2->turn_off(),
+            networkable_light->turn_off(),
+            dimmable_light->turn_off(),
+            coffee_maker->turn_off(),
+            ac->turn_off(),
         };
     }
 
-    SwitchableLight  switchable_light_1;
-    SwitchableLight  switchable_light_2;
-    NetworkableLight networkable_light;
-    DimmableLight    dimmable_light;
-    CoffeeMaker      coffee_maker;
-    AirConditioner   ac;
+    std::shared_ptr<SwitchableLight>  switchable_light_1{std::make_shared<SwitchableLight>()};
+    std::shared_ptr<SwitchableLight>  switchable_light_2{std::make_shared<SwitchableLight>()};
+    std::shared_ptr<NetworkableLight> networkable_light{std::make_shared<NetworkableLight>()};
+    std::shared_ptr<DimmableLight>    dimmable_light{std::make_shared<DimmableLight>()};
+    std::shared_ptr<CoffeeMaker>      coffee_maker{std::make_shared<CoffeeMaker>()};
+    std::shared_ptr<AirConditioner>   ac{std::make_shared<AirConditioner>()};
 };
