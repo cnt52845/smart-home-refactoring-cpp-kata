@@ -16,45 +16,45 @@ private:
     std::string name;
 };
 
-class Switchable {
+class Switchable : virtual public Device {
 public:
     virtual ~Switchable()          = default;
     virtual std::string turn_on()  = 0;
     virtual std::string turn_off() = 0;
 };
 
-class Dimmable {
+class Dimmable : virtual public Device {
 public:
     virtual ~Dimmable()                           = default;
     virtual std::string dim(int level_in_percent) = 0;
 };
 
-class Networkable {
+class Networkable : virtual public Device {
 public:
     virtual ~Networkable()                                                  = default;
     virtual std::string connect_to_network(const std::string& network_name) = 0;
 };
 
-class TemperatureAdjustable {
+class TemperatureAdjustable : virtual public Device {
 public:
     virtual ~TemperatureAdjustable()                                = default;
     virtual std::string set_temperature(int temperature_in_celcius) = 0;
 };
 
-class BeverageMaker {
+class BeverageMaker : virtual public Device {
 public:
     virtual ~BeverageMaker()                                   = default;
     virtual std::string brew(const std::string& beverage_type) = 0;
 };
 
-class ShadeControl {
+class ShadeControl : virtual public Device {
 public:
     virtual ~ShadeControl()     = default;
     virtual std::string open()  = 0;
     virtual std::string close() = 0;
 };
 
-class CleaningAppliance {
+class CleaningAppliance : virtual public Device {
 public:
     virtual ~CleaningAppliance()         = default;
     virtual std::string start_cleaning() = 0;
@@ -62,7 +62,7 @@ public:
 };
 
 // Concreete devices implementing the interfaces
-class SwitchableLight final : public Device, public Switchable {
+class SwitchableLight final : public Switchable {
 public:
     explicit SwitchableLight(std::string device_name) : Device(std::move(device_name)) {}
 
@@ -70,7 +70,7 @@ public:
     std::string turn_off() override { return "Switchable light turned off"; }
 };
 
-class DimmableLight final : public Device, public Switchable, public Dimmable {
+class DimmableLight final : public Switchable, public Dimmable {
 public:
     explicit DimmableLight(std::string device_name) : Device(std::move(device_name)) {}
 
@@ -83,7 +83,7 @@ public:
     }
 };
 
-class NetworkableLight final : public Device, public Switchable, public Networkable {
+class NetworkableLight final : public Switchable, public Networkable {
 public:
     explicit NetworkableLight(std::string device_name) : Device(std::move(device_name)) {}
 
@@ -96,7 +96,7 @@ public:
     }
 };
 
-class AirConditioner final : public Device, public Switchable, public TemperatureAdjustable {
+class AirConditioner final : public Switchable, public TemperatureAdjustable {
 public:
     explicit AirConditioner(std::string device_name) : Device(std::move(device_name)) {}
 
@@ -109,7 +109,7 @@ public:
     }
 };
 
-class CoffeeMaker final : public Device, public Switchable, public BeverageMaker {
+class CoffeeMaker final : public Switchable, public BeverageMaker {
 public:
     explicit CoffeeMaker(std::string device_name) : Device(std::move(device_name)) {}
 
@@ -122,7 +122,7 @@ public:
     }
 };
 
-class Blinds final : public Device, public ShadeControl {
+class Blinds final : public ShadeControl {
 public:
     explicit Blinds(std::string device_name) : Device(std::move(device_name)) {}
 
@@ -130,7 +130,7 @@ public:
     std::string close() override { return "Blinds closed"; }
 };
 
-class VacuumCleaner final : public Device, public CleaningAppliance {
+class VacuumCleaner final : public CleaningAppliance {
 public:
     explicit VacuumCleaner(std::string device_name) : Device(std::move(device_name)) {}
 
