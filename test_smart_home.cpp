@@ -7,13 +7,13 @@ class SmartHomeControllerTest : public ::testing::Test {
 protected:
     void SetUp() override
     {
-        controller->add_device(std::make_shared<SwitchableLight>());
-        controller->add_device(std::make_shared<SwitchableLight>());
-        controller->add_device(std::make_shared<NetworkableLight>());
-        controller->add_device(std::make_shared<DimmableLight>());
-        controller->add_device(std::make_shared<CoffeeMaker>());
-        controller->add_device(std::make_shared<AirConditioner>());
-        controller->add_device(std::make_shared<Blinds>());
+        controller->add_device(std::make_shared<SwitchableLight>("Living Room Light"));
+        controller->add_device(std::make_shared<SwitchableLight>("Dining Room Light"));
+        controller->add_device(std::make_shared<NetworkableLight>("Kitchen Light"));
+        controller->add_device(std::make_shared<DimmableLight>("Bedroom Light"));
+        controller->add_device(std::make_shared<CoffeeMaker>("Coffee Maker"));
+        controller->add_device(std::make_shared<AirConditioner>("AC"));
+        controller->add_device(std::make_shared<Blinds>("Bedroom Blinds"));
     }
 
     std::unique_ptr<SmartHomeController> controller{std::make_unique<SmartHomeController>()};
@@ -49,16 +49,18 @@ TEST_F(SmartHomeControllerTest, TurnOffAll)
 
 TEST_F(SmartHomeControllerTest, DimLight)
 {
-    std::shared_ptr<DimmableLight> dimmable_light{std::make_shared<DimmableLight>()};
-    std::string                    expected = "Dimmable light dimmed to 50%";
+    std::shared_ptr<DimmableLight> dimmable_light{
+        std::make_shared<DimmableLight>("Dimmable Light")};
+    std::string expected = "Dimmable light dimmed to 50%";
 
     EXPECT_EQ(dimmable_light->dim(50), expected);
 }
 
 TEST_F(SmartHomeControllerTest, ConnectLightToNetwork)
 {
-    std::shared_ptr<NetworkableLight> networkable_light{std::make_shared<NetworkableLight>()};
-    std::string                       expected = "Networkable light connected to Home Network";
+    std::shared_ptr<NetworkableLight> networkable_light{
+        std::make_shared<NetworkableLight>("Networkable Light")};
+    std::string expected = "Networkable light connected to Home Network";
 
     EXPECT_EQ(networkable_light->connect_to_network("Home Network"), expected);
 }

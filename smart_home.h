@@ -7,7 +7,11 @@
 // Abtract interfaces
 class Device {
 public:
+    explicit Device(std::string device_name) : name(std::move(device_name)) {}
     virtual ~Device() = default;
+
+private:
+    std::string name;
 };
 
 class Switchable {
@@ -51,12 +55,16 @@ public:
 // Concreete devices implementing the interfaces
 class SwitchableLight final : public Device, public Switchable {
 public:
+    explicit SwitchableLight(std::string device_name) : Device(std::move(device_name)) {}
+
     std::string turn_on() override { return "Switchable light turned on"; }
     std::string turn_off() override { return "Switchable light turned off"; }
 };
 
 class DimmableLight final : public Device, public Switchable, public Dimmable {
 public:
+    explicit DimmableLight(std::string device_name) : Device(std::move(device_name)) {}
+
     std::string turn_on() override { return "Dimmable light turned on at full brightness"; }
     std::string turn_off() override { return "Dimmable light turned off"; }
 
@@ -68,6 +76,8 @@ public:
 
 class NetworkableLight final : public Device, public Switchable, public Networkable {
 public:
+    explicit NetworkableLight(std::string device_name) : Device(std::move(device_name)) {}
+
     std::string turn_on() override { return "Networkable light turned on"; }
     std::string turn_off() override { return "Networkable light turned off"; }
 
@@ -79,6 +89,8 @@ public:
 
 class AirConditioner final : public Device, public Switchable, public TemperatureAdjustable {
 public:
+    explicit AirConditioner(std::string device_name) : Device(std::move(device_name)) {}
+
     std::string turn_on() override { return "AC turned on"; }
     std::string turn_off() override { return "AC turned off"; }
 
@@ -90,6 +102,8 @@ public:
 
 class CoffeeMaker final : public Device, public Switchable, public BeverageMaker {
 public:
+    explicit CoffeeMaker(std::string device_name) : Device(std::move(device_name)) {}
+
     std::string turn_on() override { return "Coffee maker turned on"; }
     std::string turn_off() override { return "Coffee maker turned off"; }
 
@@ -101,6 +115,8 @@ public:
 
 class Blinds final : public Device, public ShadeControl {
 public:
+    explicit Blinds(std::string device_name) : Device(std::move(device_name)) {}
+
     std::string open() override { return "Blinds opened"; }
     std::string close() override { return "Blinds closed"; }
 };
