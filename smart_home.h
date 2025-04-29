@@ -54,6 +54,13 @@ public:
     virtual std::string close() = 0;
 };
 
+class CleaningAppliance {
+public:
+    virtual ~CleaningAppliance()         = default;
+    virtual std::string start_cleaning() = 0;
+    virtual std::string stop_cleaning()  = 0;
+};
+
 // Concreete devices implementing the interfaces
 class SwitchableLight final : public Device, public Switchable {
 public:
@@ -121,6 +128,14 @@ public:
 
     std::string open() override { return "Blinds opened"; }
     std::string close() override { return "Blinds closed"; }
+};
+
+class VacuumCleaner final : public Device, public CleaningAppliance {
+public:
+    explicit VacuumCleaner(std::string device_name) : Device(std::move(device_name)) {}
+
+    std::string start_cleaning() override { return "Vacuum cleaner started cleaning"; }
+    std::string stop_cleaning() override { return "Vacuum cleaner stopped cleaning"; }
 };
 
 // Main controller class

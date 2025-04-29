@@ -14,6 +14,7 @@ protected:
         controller->add_device(std::make_shared<CoffeeMaker>("Coffee Maker"));
         controller->add_device(std::make_shared<AirConditioner>("AC"));
         controller->add_device(std::make_shared<Blinds>("Bedroom Blinds"));
+        controller->add_device(std::make_shared<VacuumCleaner>("Vacuum Cleaner"));
     }
 
     std::unique_ptr<SmartHomeController> controller{std::make_unique<SmartHomeController>()};
