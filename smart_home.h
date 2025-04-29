@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+// Abtract interfaces
 class Device {
 public:
     virtual ~Device() = default;
@@ -40,6 +41,14 @@ public:
     virtual std::string brew(const std::string& beverage_type) = 0;
 };
 
+class ShadeControl {
+public:
+    virtual ~ShadeControl()     = default;
+    virtual std::string open()  = 0;
+    virtual std::string close() = 0;
+};
+
+// Concreete devices implementing the interfaces
 class SwitchableLight final : public Device, public Switchable {
 public:
     std::string turn_on() override { return "Switchable light turned on"; }
@@ -90,6 +99,13 @@ public:
     }
 };
 
+class Blinds final : public Device, public ShadeControl {
+public:
+    std::string open() override { return "Blinds opened"; }
+    std::string close() override { return "Blinds closed"; }
+};
+
+// Main controller class
 class SmartHomeController {
 public:
     void add_device(std::shared_ptr<Device> device) { devices.push_back(device); }

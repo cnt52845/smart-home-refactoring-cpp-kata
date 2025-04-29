@@ -13,6 +13,7 @@ protected:
         controller->add_device(std::make_shared<DimmableLight>());
         controller->add_device(std::make_shared<CoffeeMaker>());
         controller->add_device(std::make_shared<AirConditioner>());
+        controller->add_device(std::make_shared<Blinds>());
     }
 
     std::unique_ptr<SmartHomeController> controller{std::make_unique<SmartHomeController>()};
