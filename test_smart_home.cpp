@@ -78,3 +78,23 @@ TEST_F(SmartHomeControllerTest, MakeQuickBreakfast)
     EXPECT_EQ(controller->make_quick_breakfast("Bedroom Blinds", "Coffee Maker", "Colombian"),
               expected);
 }
+
+TEST_F(SmartHomeControllerTest, ScheduleNightCleaning)
+{
+    std::vector<std::string> expected_schedule_cleaning_output = {
+        "Night cleaning scheduled",
+    };
+    std::vector<std::string> expected_turn_off_output = {
+        "Switchable light turned off",
+        "Switchable light turned off",
+        "Networkable light turned off",
+        "Dimmable light turned off",
+        "Coffee maker turned off",
+        "AC turned off",
+        "Vacuum cleaner started cleaning",
+    };
+
+    EXPECT_EQ(controller->schedule_night_cleaning("Vacuum Cleaner"),
+              expected_schedule_cleaning_output);
+    EXPECT_EQ(controller->turn_off_all(), expected_turn_off_output);
+}

@@ -162,6 +162,13 @@ public:
                 result.push_back(switchable->turn_off());
             }
         }
+        if (night_cleaning_schedule.is_enabled) {
+            auto vacuum_cleaner = std::dynamic_pointer_cast<VacuumCleaner>(
+                find_device(night_cleaning_schedule.device_name));
+            if (vacuum_cleaner) {
+                result.push_back(vacuum_cleaner->start_cleaning());
+            }
+        }
         return result;
     }
 
@@ -186,6 +193,13 @@ public:
         return result;
     }
 
+    std::vector<std::string> schedule_night_cleaning(const std::string& vacuum_cleaner_name)
+    {
+        night_cleaning_schedule.is_enabled  = true;
+        night_cleaning_schedule.device_name = vacuum_cleaner_name;
+        return {"Night cleaning scheduled"};
+    }
+
 private:
     const std::shared_ptr<Device> find_device(const std::string& device_name)
     {
@@ -196,4 +210,8 @@ private:
     }
 
     std::vector<std::shared_ptr<Device>> devices;
+    struct {
+        bool        is_enabled{false};
+        std::string device_name;
+    } night_cleaning_schedule;
 };
