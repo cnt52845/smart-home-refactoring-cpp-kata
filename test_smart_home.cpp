@@ -64,3 +64,16 @@ TEST_F(SmartHomeControllerTest, ConnectLightToNetwork)
 
     EXPECT_EQ(networkable_light->connect_to_network("Home Network"), expected);
 }
+
+TEST_F(SmartHomeControllerTest, MakeQuickBreakfast)
+{
+    std::vector<std::string> expected = {
+        "Blinds opened",
+        "Coffee maker turned on",
+        "Brewing Colombian coffee",
+        "Coffee maker turned off",
+    };
+
+    EXPECT_EQ(controller->make_quick_breakfast("Bedroom Blinds", "Coffee Maker", "Colombian"),
+              expected);
+}

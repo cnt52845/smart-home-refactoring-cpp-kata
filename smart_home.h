@@ -10,6 +10,8 @@ public:
     explicit Device(std::string device_name) : name(std::move(device_name)) {}
     virtual ~Device() = default;
 
+    const std::string& get_name() const { return name; }
+
 private:
     std::string name;
 };
@@ -148,6 +150,35 @@ public:
         return result;
     }
 
+    std::vector<std::string> make_quick_breakfast(const std::string& blinds_name,
+                                                  const std::string& coffe_maker_name,
+                                                  const std::string& coffee_type)
+    {
+        std::vector<std::string> result;
+
+        auto blinds = std::dynamic_pointer_cast<Blinds>(find_device(blinds_name));
+        if (blinds) {
+            result.push_back(blinds->open());
+        }
+
+        auto coffee_maker = std::dynamic_pointer_cast<CoffeeMaker>(find_device(coffe_maker_name));
+        if (coffee_maker) {
+            result.push_back(coffee_maker->turn_on());
+            result.push_back(coffee_maker->brew(coffee_type));
+            result.push_back(coffee_maker->turn_off());
+        }
+
+        return result;
+    }
+
 private:
+    const std::shared_ptr<Device> find_device(const std::string& device_name)
+    {
+        auto it = std::find_if(devices.begin(), devices.end(), [&device_name](const auto& device) {
+            return device->get_name() == device_name;
+        });
+        return (it != devices.end()) ? *it : nullptr;
+    }
+
     std::vector<std::shared_ptr<Device>> devices;
 };
