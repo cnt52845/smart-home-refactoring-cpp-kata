@@ -5,6 +5,16 @@
 
 class SmartHomeControllerTest : public ::testing::Test {
 protected:
+    void SetUp() override
+    {
+        controller->add_device(std::make_shared<SwitchableLight>());
+        controller->add_device(std::make_shared<SwitchableLight>());
+        controller->add_device(std::make_shared<NetworkableLight>());
+        controller->add_device(std::make_shared<DimmableLight>());
+        controller->add_device(std::make_shared<CoffeeMaker>());
+        controller->add_device(std::make_shared<AirConditioner>());
+    }
+
     std::unique_ptr<SmartHomeController> controller{std::make_unique<SmartHomeController>()};
 };
 
